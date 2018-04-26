@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"io/ioutil"
+	"io"
+	"os"
 )
 
 var Config struct {
@@ -25,8 +26,10 @@ func main() {
 		return
 	}
 	defer resp.Body.Close()
-	b, err := ioutil.ReadAll(resp.Body)
-	if err == nil {
-		fmt.Println(string(b))
+
+	_, err = io.Copy(os.Stdout, resp.Body)
+	if err != nil {
+		fmt.Println(err)
+		return
 	}
 }

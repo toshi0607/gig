@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"io"
 	"os"
+	"flag"
 )
 
 var Config struct {
@@ -13,14 +14,18 @@ var Config struct {
 
 func init() {
 	//flag.StringVar(&Config.List, "l", "", "show language list")
-	//if len(flag.Args()) != 1 {
-	//	fmt.Println("Usage: go run main.go <language> [options]")
-	//	os.Exit(-1)
-	//}
+	flag.Parse()
+
+	if len(flag.Args()) != 1 {
+		fmt.Println("Usage: go run main.go <language> [options]")
+		os.Exit(-1)
+	}
 }
 
 func main() {
-	resp, err := http.Get("https://raw.githubusercontent.com/github/gitignore/master/Go.gitignore")
+	lang := flag.Args()[0]
+	url := "https://raw.githubusercontent.com/github/gitignore/master/" + lang + ".gitignore"
+	resp, err := http.Get(url)
 	if err != nil {
 		fmt.Println(err)
 		return

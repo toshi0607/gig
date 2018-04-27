@@ -8,6 +8,7 @@ import (
 	"flag"
 	"golang.org/x/net/html"
 	"strings"
+	"net/url"
 )
 
 //var Config struct {
@@ -20,7 +21,7 @@ func init() {
 	//flag.BoolVar(&Config.List, "l", false, "show language list")
 	flag.Parse()
 
-	if *boolOpt ==false && len(flag.Args()) != 1 {
+	if *boolOpt == false && len(flag.Args()) != 1 {
 		fmt.Println("Usage: go run main.go <language> [options]")
 		os.Exit(-1)
 	}
@@ -78,7 +79,11 @@ func parseItem(r io.Reader, ch chan string) {
 			for _, a := range n.Attr {
 				if a.Key == "href" && strings.HasSuffix(a.Val, ".gitignore") {
 					s := strings.Split(a.Val, "/")
-					ch <- strings.Replace(s[len(s)-1], ".gitignore", "", -1)
+					decoded, err := url.QueryUnescape(strings.Replace(s[len(s)-1], ".gitignore", "", -1))
+					if err != nil {
+						fmt.Println(err)
+					}
+					ch <- decoded
 				}
 			}
 		}

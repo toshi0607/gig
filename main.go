@@ -20,7 +20,7 @@ func init() {
 	//flag.BoolVar(&Config.List, "l", false, "show language list")
 	flag.Parse()
 
-	if len(flag.Args()) != 1 {
+	if *boolOpt ==false && len(flag.Args()) != 1 {
 		fmt.Println("Usage: go run main.go <language> [options]")
 		os.Exit(-1)
 	}
@@ -36,8 +36,13 @@ func main() {
 			return
 		}
 		defer r.Body.Close()
-		result := ParseItem(r.Body)
-		for _, v := range result {
+		langCh := make(chan string)
+		go func() {
+			parseItem(r.Body, langCh)
+			close(langCh)
+		}()
+
+		for v := range langCh {
 			fmt.Println(v)
 		}
 
@@ -61,8 +66,7 @@ func main() {
 	}
 }
 
-func ParseItem(r io.Reader) []string {
-	results := make([]string, 128)
+func parseItem(r io.Reader, ch chan string) {
 	doc, err := html.Parse(r)
 	if err != nil {
 		fmt.Println(err)
@@ -74,8 +78,7 @@ func ParseItem(r io.Reader) []string {
 			for _, a := range n.Attr {
 				if a.Key == "href" && strings.HasSuffix(a.Val, ".gitignore") {
 					s := strings.Split(a.Val, "/")
-					result := strings.Replace(s[len(s)-1], ".gitignore", "", -1)
-					results = append(results, result)
+					ch <- strings.Replace(s[len(s)-1], ".gitignore", "", -1)
 				}
 			}
 		}
@@ -84,5 +87,4 @@ func ParseItem(r io.Reader) []string {
 		}
 	}
 	f(doc)
-	return results
 }

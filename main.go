@@ -11,10 +11,13 @@ import (
 	"golang.org/x/net/html"
 
 	"github.com/jessevdk/go-flags"
+	"time"
 )
 
 var config struct {
 	List  bool  `short:"l" long:"list" description:"shows list of available language"`
+	File bool `short:"f" long:"File" description:"outputs .ignore file"`
+	Quiet   bool `short:"q" long:"quiet" description:"hide stdout"`
 	Args    struct {
 		Language string
 	} `positional-args:"yes"`
@@ -29,6 +32,11 @@ func init() {
 
 	if config.List == false && config.Args.Language == "" {
 		fmt.Println("Usage: go run main.go <language> [options]")
+		os.Exit(-1)
+	}
+
+	if config.Quiet && !config.File {
+		fmt.Println("gig: output something!")
 		os.Exit(-1)
 	}
 }
@@ -55,6 +63,22 @@ func main() {
 		return
 	}
 
+	var writers []io.Writer
+
+	if config.File {
+		var writer io.WriteCloser
+		writer, err := os.Create(".gitignore"+ time.Now().Format("2006-01-02-15:04:05"))
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		writers = append(writers, writer)
+		defer writer.Close()
+	}
+	if !config.Quiet {
+		writers = append(writers, os.Stdout)
+	}
+
 	lang := config.Args.Language
 	url := "https://raw.githubusercontent.com/github/gitignore/master/" + lang + ".gitignore"
 	resp, err := http.Get(url)
@@ -64,7 +88,9 @@ func main() {
 	}
 	defer resp.Body.Close()
 
-	_, err = io.Copy(os.Stdout, resp.Body)
+	writers = append(writers, os.Stdout)
+	dest := io.MultiWriter(writers...)
+	_, err = io.Copy(dest, resp.Body)
 	if err != nil {
 		fmt.Println(err)
 		return

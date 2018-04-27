@@ -5,31 +5,36 @@ import (
 	"net/http"
 	"io"
 	"os"
-	"flag"
-	"golang.org/x/net/html"
 	"strings"
 	"net/url"
+
+	"golang.org/x/net/html"
+
+	"github.com/jessevdk/go-flags"
 )
 
-//var Config struct {
-//	List bool
-//}
-
-var boolOpt = flag.Bool("l", false, "show language list")
+var config struct {
+	List  bool  `short:"l" long:"list" description:"shows list of available language"`
+	Args    struct {
+		Language string
+	} `positional-args:"yes"`
+}
 
 func init() {
-	//flag.BoolVar(&Config.List, "l", false, "show language list")
-	flag.Parse()
+	_, err := flags.ParseArgs(&config, os.Args[1:])
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
-	if *boolOpt == false && len(flag.Args()) != 1 {
+	if config.List == false && config.Args.Language == "" {
 		fmt.Println("Usage: go run main.go <language> [options]")
 		os.Exit(-1)
 	}
 }
 
 func main() {
-	//if Config.List {
-	if *boolOpt {
+	if config.List {
 		url := "https://github.com/github/gitignore"
 		r, err := http.Get(url)
 		if err != nil {
@@ -50,8 +55,7 @@ func main() {
 		return
 	}
 
-	lang := flag.Args()[0]
-	fmt.Printf("searching %v's gitignore file...\n", lang)
+	lang := config.Args.Language
 	url := "https://raw.githubusercontent.com/github/gitignore/master/" + lang + ".gitignore"
 	resp, err := http.Get(url)
 	if err != nil {

@@ -7,18 +7,17 @@ import (
 	"os"
 	"strings"
 	"net/url"
-
-	"golang.org/x/net/html"
+	"time"
 
 	"github.com/jessevdk/go-flags"
-	"time"
+	"github.com/PuerkitoBio/goquery"
 )
 
 var config struct {
-	List  bool  `short:"l" long:"list" description:"shows list of available language"`
-	File bool `short:"f" long:"File" description:"outputs .ignore file"`
-	Quiet   bool `short:"q" long:"quiet" description:"hide stdout"`
-	Args    struct {
+	List  bool `short:"l" long:"list" description:"shows list of available language"`
+	File  bool `short:"f" long:"File" description:"outputs .ignore file"`
+	Quiet bool `short:"q" long:"quiet" description:"hide stdout"`
+	Args struct {
 		Language string
 	} `positional-args:"yes"`
 }
@@ -52,7 +51,7 @@ func main() {
 		defer r.Body.Close()
 		langCh := make(chan string)
 		go func() {
-			parseItem(r.Body, langCh)
+			getLang(r.Body, langCh)
 			close(langCh)
 		}()
 
@@ -67,7 +66,7 @@ func main() {
 
 	if config.File {
 		var writer io.WriteCloser
-		writer, err := os.Create(".gitignore"+ time.Now().Format("2006-01-02-15:04:05"))
+		writer, err := os.Create(".gitignore" + time.Now().Format("2006-01-02-15:04:05")) // for test
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -97,29 +96,25 @@ func main() {
 	}
 }
 
-func parseItem(r io.Reader, ch chan string) {
-	doc, err := html.Parse(r)
+func getLang(r io.Reader, ch chan string) {
+	doc, err := goquery.NewDocumentFromReader(r)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	var f func(*html.Node)
-	f = func(n *html.Node) {
-		if n.Type == html.ElementNode && n.Data == "a" {
-			for _, a := range n.Attr {
-				if a.Key == "href" && strings.HasSuffix(a.Val, ".gitignore") {
-					s := strings.Split(a.Val, "/")
-					decoded, err := url.QueryUnescape(strings.Replace(s[len(s)-1], ".gitignore", "", -1))
-					if err != nil {
-						fmt.Println(err)
-					}
-					ch <- decoded
-				}
+	doc.Find("a").Each(func(_ int, s *goquery.Selection) {
+		url, _ := s.Attr("href")
+		if strings.HasSuffix(url, ".gitignore") {
+			decoded, err := extractLang(url)
+			if err != nil {
+				fmt.Println(err)
 			}
+			ch <- decoded
 		}
-		for c := n.FirstChild; c != nil; c = c.NextSibling {
-			f(c)
-		}
-	}
-	f(doc)
+	})
+}
+
+func extractLang(s string) (string, error) {
+	str := strings.Split(s, "/")
+	return url.QueryUnescape(strings.Replace(str[len(str)-1], ".gitignore", "", -1))
 }

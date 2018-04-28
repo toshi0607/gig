@@ -14,6 +14,7 @@ import (
 
 type Gig struct {
 	OutStream, ErrStream io.Writer
+	Output []io.Writer
 }
 
 func (g *Gig) Run() int {
@@ -37,8 +38,6 @@ func (g *Gig) Run() int {
 		return 1
 	}
 
-	var writers []io.Writer
-
 	if config.File {
 		var writer io.WriteCloser
 		writer, err := os.Create(gitignoreExt + time.Now().Format("2006-01-02-15:04:05")) // for test
@@ -46,11 +45,11 @@ func (g *Gig) Run() int {
 			fmt.Println(err)
 			return 1
 		}
-		writers = append(writers, writer)
+		g.Output = append(g.Output, writer)
 		defer writer.Close()
 	}
 	if !config.Quiet {
-		writers = append(writers, os.Stdout)
+		g.Output = append(g.Output, os.Stdout)
 	}
 
 	lang := config.Args.Language
@@ -62,8 +61,7 @@ func (g *Gig) Run() int {
 	}
 	defer resp.Body.Close()
 
-	writers = append(writers, os.Stdout)
-	dest := io.MultiWriter(writers...)
+	dest := io.MultiWriter(g.Output...)
 	_, err = io.Copy(dest, resp.Body)
 	if err != nil {
 		fmt.Println(err)

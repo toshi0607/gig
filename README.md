@@ -42,6 +42,62 @@ Help Options:
   -h, --help      Show this help message
 ```
 
+### Example
+
+```sh
+# show available languages
+$ gig -l
+Actionscript
+Ada
+Agda
+Android
+...
+
+
+# search available languages like go
+$ gig -l | grep -i go
+Go
+Godot
+IGORPro
+
+
+# output to the .gitignore file
+$ gig Ruby -f
+$ cat .gitignore
+*.gem
+*.rbc
+/.config
+/coverage/
+...
+
+
+# add to the existing .gitignore file
+$ gig Go >> .gitignore
+$ cat .gitignore
+...
+# Binaries for programs and plugins
+*.exe
+*.exe~
+...
+
+```
+
+### Tips
+
+[peco](https://github.com/peco/peco) 's incremental search helps gig a lot.
+
+```sh
+$ gig $(gig -l | peco)
+```
+
+![](https://user-images.githubusercontent.com/7035446/39398424-86087f74-4b48-11e8-9428-6f771ac8074b.gif)
+
+Setting alias like blow to your dotfile (.bashrc, .zshrc, etc) is also useful.
+
+```sh
+alias pgig='gig $(gig -l | peco)'
+```
+
 ## Install
 
 ### for Homebrew (macOS, linux)
@@ -76,4 +132,5 @@ Coming soon!
 
 ## Author
 
-[toshi0607](https://github.com/toshi0607)
+* [GitHug](https://github.com/toshi0607)
+* [twitter](https://twitter.com/toshi0607)

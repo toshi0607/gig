@@ -18,7 +18,8 @@ func Test_Run(t *testing.T)  {
 		{[]string{"output gitignore", "Go", "-q"}, []string{"# Test binary, build with `go test -c`"}, 0},
 		{[]string{"shows list", "-l"}, []string{"Go", "Rails","Kotlin"}, 0},
 		{[]string{"shows version", "-v"}, []string{"gig version"}, 1},
-		{[]string{"show usage", "-q"}, []string{"usage: "}, 1},
+		{[]string{"shows usage", "-q"}, []string{"please check usage above"}, 1},
+		{[]string{"shows help", "-h"}, []string{"Usage:"}, 1},
 	}
 
 	for _, te := range tests {

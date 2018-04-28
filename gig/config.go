@@ -1,7 +1,6 @@
 package gig
 
 import (
-	"os"
 	"fmt"
 
 	"github.com/jessevdk/go-flags"
@@ -18,7 +17,8 @@ type config struct {
 }
 
 func (g *Gig) initConfig() error {
-	_, err := flags.ParseArgs(&g.Config, os.Args[1:])
+	p := flags.NewParser(&g.Config, flags.HelpFlag)
+	_, err := p.Parse()
 	if err != nil {
 		return err
 	}
@@ -28,7 +28,8 @@ func (g *Gig) initConfig() error {
 	}
 
 	if !g.Config.List && g.Config.Args.Language == "" {
-		return fmt.Errorf("usage: go run main.go <language> [options]")
+		p.WriteHelp(g.ErrStream)
+		return fmt.Errorf("\n please check usage above")
 	}
 
 	return nil

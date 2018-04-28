@@ -5,10 +5,9 @@ import (
 	"net/http"
 	"fmt"
 	"os"
-	"time"
 )
 
-const version = "v0.1.0"
+const version = "v0.0.1"
 
 type Gig struct {
 	OutStream, ErrStream io.Writer
@@ -34,7 +33,7 @@ func (g *Gig) Run() int {
 
 	if g.Config.File {
 		var writer io.WriteCloser
-		writer, err := os.Create(gitignoreExt + time.Now().Format("2006-01-02-15:04:05")) // for test
+		writer, err := os.Create(gitignoreExt)
 		if err != nil {
 			fmt.Fprintln(g.ErrStream, err)
 			return 1

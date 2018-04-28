@@ -2,7 +2,7 @@ gig
 ====
 
 ## Description
-generate (or output) .gitignore using 
+generate (or output) .gitignore using [github/gitignore](https://github.com/github/gitignore)
 
 ## Demo
 ![](https://user-images.githubusercontent.com/7035446/39394981-84cef0aa-4b13-11e8-86b9-7af4f979efa3.gif)

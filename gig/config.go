@@ -24,18 +24,11 @@ func (g *Gig) initConfig() error {
 	}
 
 	if g.Config.Version {
-		fmt.Printf("gig version %s\n", version)
-		os.Exit(-1)
+		return fmt.Errorf("gig version %s\n", version)
 	}
 
-	if g.Config.List == false && g.Config.Args.Language == "" {
-		fmt.Println("Usage: go run main.go <language> [options]")
-		os.Exit(-1)
-	}
-
-	if g.Config.Quiet && !g.Config.File {
-		fmt.Println("gig: output something!")
-		os.Exit(-1)
+	if !g.Config.List && g.Config.Args.Language == "" {
+		return fmt.Errorf("usage: go run main.go <language> [options]")
 	}
 
 	return nil

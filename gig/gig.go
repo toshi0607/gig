@@ -19,14 +19,14 @@ type Gig struct {
 func (g *Gig) Run() int {
 	err := g.initConfig()
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(g.ErrStream, err)
 		return 1
 	}
 
 	if g.Config.List {
-		err := showList()
+		err := g.showList()
 		if err != nil {
-			fmt.Println(err)
+			fmt.Fprintln(g.ErrStream, err)
 			return 1
 		}
 		return 0
@@ -36,7 +36,7 @@ func (g *Gig) Run() int {
 		var writer io.WriteCloser
 		writer, err := os.Create(gitignoreExt + time.Now().Format("2006-01-02-15:04:05")) // for test
 		if err != nil {
-			fmt.Println(err)
+			fmt.Fprintln(g.ErrStream, err)
 			return 1
 		}
 		g.Output = append(g.Output, writer)
@@ -50,7 +50,7 @@ func (g *Gig) Run() int {
 	url := gitignoreFileBaseURL + lang + gitignoreExt
 	resp, err := http.Get(url)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(g.ErrStream, err)
 		return 1
 	}
 	defer resp.Body.Close()
@@ -58,7 +58,7 @@ func (g *Gig) Run() int {
 	dest := io.MultiWriter(g.Output...)
 	_, err = io.Copy(dest, resp.Body)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(g.ErrStream, err)
 		return 1
 	}
 	return 0

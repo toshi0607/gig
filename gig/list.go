@@ -10,7 +10,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func showList() error {
+func (g *Gig) showList() error {
 	r, err := http.Get(gitignoreBaseURL)
 	if err != nil {
 		return err
@@ -27,7 +27,7 @@ func showList() error {
 		if err != nil {
 			return err
 		}
-		fmt.Println(decoded)
+		fmt.Fprintln(g.OutStream, decoded)
 	}
 	return nil
 }

@@ -15,10 +15,18 @@ type Gig struct {
 }
 
 func (g *Gig) Run() int {
-	g.initConfig()
+	err := g.initConfig()
+	if err != nil {
+		fmt.Println(err)
+		return 1
+	}
 
 	if g.Config.List {
-		showList()
+		err := showList()
+		if err != nil {
+			fmt.Println(err)
+			return 1
+		}
 		return 0
 	}
 

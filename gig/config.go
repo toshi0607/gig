@@ -15,11 +15,10 @@ type config struct {
 	} `positional-args:"yes"`
 }
 
-func (g *Gig) initConfig() {
+func (g *Gig) initConfig() error {
 	_, err := flags.ParseArgs(&g.Config, os.Args[1:])
 	if err != nil {
-		fmt.Println(err)
-		return
+		return err
 	}
 
 	if g.Config.List == false && g.Config.Args.Language == "" {

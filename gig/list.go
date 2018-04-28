@@ -10,11 +10,10 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func showList() {
+func showList() error {
 	r, err := http.Get(gitignoreBaseURL)
 	if err != nil {
-		fmt.Println(err)
-		return
+		return err
 	}
 	defer r.Body.Close()
 	langCh := make(chan string)
@@ -24,29 +23,31 @@ func showList() {
 	}()
 
 	for v := range langCh {
-		fmt.Println(v)
+		decoded, err := url.QueryUnescape(v)
+		if err != nil {
+			return err
+		}
+		fmt.Println(decoded)
 	}
+	return nil
 }
 
-func getLang(r io.Reader, ch chan string) {
+func getLang(r io.Reader, ch chan string) error {
 	doc, err := goquery.NewDocumentFromReader(r)
 	if err != nil {
-		fmt.Println(err)
+		return err
 	}
 
 	doc.Find("a").Each(func(_ int, s *goquery.Selection) {
 		url, ok := s.Attr("href")
 		if ok && strings.HasSuffix(url, gitignoreExt) {
-			decoded, err := extractLang(url)
-			if err != nil {
-				fmt.Println(err)
-			}
-			ch <- decoded
+			ch <- extractLang(url)
 		}
 	})
+	return nil
 }
 
-func extractLang(s string) (string, error) {
+func extractLang(s string) string {
 	str := strings.Split(s, "/")
-	return url.QueryUnescape(strings.Replace(str[len(str)-1], gitignoreExt, "", -1))
+	return strings.Replace(str[len(str)-1], gitignoreExt, "", -1)
 }

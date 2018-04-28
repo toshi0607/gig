@@ -8,6 +8,8 @@ import (
 	"time"
 )
 
+const version = "v0.1.0"
+
 type Gig struct {
 	OutStream, ErrStream io.Writer
 	Output []io.Writer

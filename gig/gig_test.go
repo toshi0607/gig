@@ -16,6 +16,8 @@ func Test_Run(t *testing.T)  {
 		expectedCode int
 	}{
 		{[]string{"output gitignore", "Go", "-q"}, []string{"# Test binary, build with `go test -c`"}, 0},
+		{[]string{"output gitignore", "Ruby", "-q"}, []string{"*.gem"}, 0},
+		{[]string{"output gitignore", "C++", "-q"}, []string{"# Compiled Static libraries"}, 0},
 		{[]string{"shows list", "-l"}, []string{"Go", "Rails","Kotlin"}, 0},
 		{[]string{"shows version", "-v"}, []string{"gig version"}, 1},
 		{[]string{"shows usage", "-q"}, []string{"please check usage above"}, 1},

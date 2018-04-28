@@ -44,9 +44,28 @@ Help Options:
 
 ## Install
 
+### for Homebrew (macOS, linux)
+
+```sh
+$ brew tap toshi0607/homebrew-gig
+$ brew install gig
+```
+
+### for Go environment
+
 ```sh
 $ go get -u github.com/toshi0607/gig
 ```
+
+### for others
+You can download the binary directly from [latest release](https://github.com/toshi0607/gig/releases/latest)
+
+* gig_darwin_386.zip
+* gig_darwin_amd64.zip
+* gig_linux_386.zip
+* gig_linux_amd64.zip
+* gig_windows_386.zip
+* gig_windows_amd64.zip
 
 ## Contribution
 

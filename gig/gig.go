@@ -11,15 +11,18 @@ import (
 type Gig struct {
 	OutStream, ErrStream io.Writer
 	Output []io.Writer
+	Config config
 }
 
 func (g *Gig) Run() int {
-	if config.List {
+	g.initConfig()
+
+	if g.Config.List {
 		showList()
 		return 0
 	}
 
-	if config.File {
+	if g.Config.File {
 		var writer io.WriteCloser
 		writer, err := os.Create(gitignoreExt + time.Now().Format("2006-01-02-15:04:05")) // for test
 		if err != nil {
@@ -29,11 +32,11 @@ func (g *Gig) Run() int {
 		g.Output = append(g.Output, writer)
 		defer writer.Close()
 	}
-	if !config.Quiet {
+	if !g.Config.Quiet {
 		g.Output = append(g.Output, os.Stdout)
 	}
 
-	lang := config.Args.Language
+	lang := g.Config.Args.Language
 	url := gitignoreFileBaseURL + lang + gitignoreExt
 	resp, err := http.Get(url)
 	if err != nil {

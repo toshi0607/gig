@@ -6,10 +6,12 @@ import (
 	"fmt"
 	"os"
 	"time"
-	"github.com/jessevdk/go-flags"
-	"github.com/PuerkitoBio/goquery"
 	"strings"
 	"net/url"
+
+	"github.com/jessevdk/go-flags"
+	"github.com/PuerkitoBio/goquery"
+
 )
 
 type Gig struct {
@@ -45,8 +47,7 @@ func init() {
 
 func (g *Gig) Run() int {
 	if config.List {
-		url := "https://github.com/github/gitignore"
-		r, err := http.Get(url)
+		r, err := http.Get(gitignoreBaseURL)
 		if err != nil {
 			fmt.Println(err)
 			return 1
@@ -69,7 +70,7 @@ func (g *Gig) Run() int {
 
 	if config.File {
 		var writer io.WriteCloser
-		writer, err := os.Create(".gitignore" + time.Now().Format("2006-01-02-15:04:05")) // for test
+		writer, err := os.Create(gitignoreExt + time.Now().Format("2006-01-02-15:04:05")) // for test
 		if err != nil {
 			fmt.Println(err)
 			return 1
@@ -82,7 +83,7 @@ func (g *Gig) Run() int {
 	}
 
 	lang := config.Args.Language
-	url := "https://raw.githubusercontent.com/github/gitignore/master/" + lang + ".gitignore"
+	url := gitignoreFileBaseURL + lang + gitignoreExt
 	resp, err := http.Get(url)
 	if err != nil {
 		fmt.Println(err)
@@ -108,7 +109,7 @@ func getLang(r io.Reader, ch chan string) {
 
 	doc.Find("a").Each(func(_ int, s *goquery.Selection) {
 		url, ok := s.Attr("href")
-		if ok && strings.HasSuffix(url, ".gitignore") {
+		if ok && strings.HasSuffix(url, gitignoreExt) {
 			decoded, err := extractLang(url)
 			if err != nil {
 				fmt.Println(err)
@@ -120,5 +121,5 @@ func getLang(r io.Reader, ch chan string) {
 
 func extractLang(s string) (string, error) {
 	str := strings.Split(s, "/")
-	return url.QueryUnescape(strings.Replace(str[len(str)-1], ".gitignore", "", -1))
+	return url.QueryUnescape(strings.Replace(str[len(str)-1], gitignoreExt, "", -1))
 }

@@ -132,5 +132,5 @@ Coming soon!
 
 ## Author
 
-* [GitHug](https://github.com/toshi0607)
+* [GitHub](https://github.com/toshi0607)
 * [twitter](https://twitter.com/toshi0607)

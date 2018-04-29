@@ -7,9 +7,9 @@ import (
 )
 
 type config struct {
-	List  bool `short:"l" long:"list" description:"Show list of available language"`
-	File  bool `short:"f" long:"File" description:"Output .gitignore file"`
-	Quiet bool `short:"q" long:"quiet" description:"Hide stdout"`
+	List    bool `short:"l" long:"list" description:"Show list of available language"`
+	File    bool `short:"f" long:"File" description:"Output .gitignore file"`
+	Quiet   bool `short:"q" long:"quiet" description:"Hide stdout"`
 	Version bool `short:"v" long:"version" description:"Show version"`
 	Args struct {
 		Language string

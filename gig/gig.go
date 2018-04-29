@@ -1,20 +1,22 @@
 package gig
 
 import (
+	"fmt"
 	"io"
 	"net/http"
-	"fmt"
 	"os"
 )
 
 const version = "v0.0.1"
 
+// Gig is the body of the cli
 type Gig struct {
 	OutStream, ErrStream io.Writer
-	Output []io.Writer
-	Config config
+	Output               []io.Writer
+	Config               config
 }
 
+// Run exwecutes gig's functions
 func (g *Gig) Run() int {
 	err := g.initConfig()
 	if err != nil {

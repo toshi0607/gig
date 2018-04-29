@@ -1,12 +1,12 @@
 package gig
 
 import (
-	"testing"
 	"bytes"
-	"os"
-	"io"
 	"fmt"
+	"io"
+	"os"
 	"strings"
+	"testing"
 )
 
 func Test_Run(t *testing.T) {

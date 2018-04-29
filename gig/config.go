@@ -11,7 +11,7 @@ type config struct {
 	File    bool `short:"f" long:"File" description:"Output .gitignore file"`
 	Quiet   bool `short:"q" long:"quiet" description:"Hide stdout"`
 	Version bool `short:"v" long:"version" description:"Show version"`
-	Args struct {
+	Args    struct {
 		Language string
 	} `positional-args:"yes"`
 }

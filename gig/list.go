@@ -1,11 +1,11 @@
 package gig
 
 import (
-	"net/http"
 	"fmt"
-	"strings"
-	"net/url"
 	"io"
+	"net/http"
+	"net/url"
+	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 )

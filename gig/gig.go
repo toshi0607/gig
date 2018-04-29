@@ -16,7 +16,7 @@ type Gig struct {
 	Config               config
 }
 
-// Run exwecutes gig's functions
+// Run executes gig's functions
 func (g *Gig) Run() int {
 	err := g.initConfig()
 	if err != nil {

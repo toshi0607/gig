@@ -129,7 +129,12 @@ You can download the binary directly from [latest release](https://github.com/to
 
 ## Contribution
 
-Coming soon!
+1. Fork ([https://github.com/toshi0607/gig/fork](https://github.com/toshi0607/gig/fork))
+1. Create a feature branch
+1. Commit your changes
+1. Run test suite with the `make test` command and confirm that it passes
+1. Run `gofmt -s`
+1. Create new Pull Request
 
 ## Licence
 [MIT](LICENSE) file for details.

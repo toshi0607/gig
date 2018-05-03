@@ -14,7 +14,7 @@ generate (or output) .gitignore using [github/gitignore](https://github.com/gith
 ## VS. 
 
 ### gibo
-[simonwhitaker/gio](https://github.com/simonwhitaker/gibo) is useful tool for .gitinore.
+[simonwhitaker/gibo](https://github.com/simonwhitaker/gibo) is useful tool for .gitinore.
 It does `git clone` the templates from [github/gitignore](https://github.com/github/gitignore) and it uses local files.
 So the gibo is fast, but you have to update local files to use tha latest template.
 

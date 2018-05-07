@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jessevdk/go-flags"
+	"github.com/pkg/errors"
 )
 
 type config struct {
@@ -20,7 +21,7 @@ func (g *Gig) initConfig() error {
 	p := flags.NewParser(&g.Config, flags.HelpFlag)
 	_, err := p.Parse()
 	if err != nil {
-		return err
+		return errors.Wrapf(err, "failed to parse. Config: %s", &g.Config)
 	}
 
 	if g.Config.Version {

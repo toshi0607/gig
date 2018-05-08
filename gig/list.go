@@ -8,34 +8,37 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/pkg/errors"
 )
 
 func (g *Gig) showList() error {
-	r, err := http.Get(gitignoreBaseURL)
+	resp, err := http.Get(gitignoreBaseURL)
 	if err != nil {
-		return err
+		return errors.Wrapf(err, "failed to access URL: %s", gitignoreBaseURL)
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
+
 	langCh := make(chan string)
 	go func() {
-		getLang(r.Body, langCh)
+		getLang(resp.Body, langCh)
 		close(langCh)
 	}()
 
 	for v := range langCh {
 		decoded, err := url.QueryUnescape(v)
 		if err != nil {
-			return err
+			return errors.Wrapf(err, "failed to unescape: %s", v)
 		}
 		fmt.Fprintln(g.OutStream, decoded)
 	}
+
 	return nil
 }
 
 func getLang(r io.Reader, ch chan string) error {
 	doc, err := goquery.NewDocumentFromReader(r)
 	if err != nil {
-		return err
+		return errors.Wrap(err, "failed to get document")
 	}
 
 	doc.Find("a").Each(func(_ int, s *goquery.Selection) {

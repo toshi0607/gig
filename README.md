@@ -1,6 +1,7 @@
 gig
 ====
 
+[![Build Status](https://travis-ci.org/toshi0607/gig.svg?branch=master)](https://travis-ci.org/toshi0607/gig)
 [![Go Report Card](https://goreportcard.com/badge/github.com/toshi0607/gig)](https://goreportcard.com/report/github.com/toshi0607/gig)
 [![MIT License](http://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/toshi0607/gig/blob/master/LICENSE)
 [![Codecov](https://codecov.io/github/toshi0607/gig/coverage.svg?branch=master)](https://codecov.io/github/toshi0607/gig?branch=master)

@@ -1,7 +1,16 @@
 language: go
+
+sudo: false
+
 go:
   - 1.10
+
+before_install:
+  - go get -u github.com/golang/dep/cmd/dep
+  - dep ensure
+
 script:
-  - make test
-after_success:
-  - test -n "$TRAVIS_TAG" && script/release
+  - make test-all
+
+os:
+  - osx

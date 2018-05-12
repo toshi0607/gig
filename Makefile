@@ -3,7 +3,7 @@ PACKAGES = $(shell ./scripts/packages.sh)
 test-all: vet lint test
 
 test:
-	go test -v -parallel=4 ${PACKAGES} -race -coverprofile=profile.out -covermode=atomic
+	$(shell ./scripts/test.sh)
 
 vet:
 	go vet ${PACKAGES}

@@ -1,4 +1,4 @@
-PACKAGES = $(shell go list ./... | grep -v '/vendor/')
+PACKAGES = $(shell ./scripts/packages.sh)
 
 test-all: vet lint test
 

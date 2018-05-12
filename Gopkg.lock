@@ -20,6 +20,12 @@
   version = "v1.4.0"
 
 [[projects]]
+  name = "github.com/pkg/errors"
+  packages = ["."]
+  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
+  version = "v0.8.0"
+
+[[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = [
@@ -31,6 +37,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6a9ca711f7126a124f949796543d9cedfec89672f435b0ac6ccac53283a02d25"
+  inputs-digest = "aa4ee99581bcede628d5822c4a6f3ce6679ce69a2847d14293764812023aaaf6"
   solver-name = "gps-cdcl"
   solver-version = 1

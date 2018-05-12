@@ -8,6 +8,6 @@ deps: setup
 	dep ensure
 
 test: deps
-	go test -v
+	go test -race -cover -v ./...
 
 .PHONY: setup deps test

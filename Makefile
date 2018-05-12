@@ -1,13 +1,15 @@
-setup:
-	go get -v -u \
-		github.com/golang/dep/cmd/dep \
-		github.com/laher/goxc \
-		github.com/tcnksm/ghr
+PACKAGES = $(shell go list ./... | grep -v '/vendor/')
 
-deps: setup
-	dep ensure
+test-all: vet lint test
 
-test: deps
-	go test -race -cover -v ./...
+test:
+	go test -v -parallel=4 ${PACKAGES}
 
-.PHONY: setup deps test
+vet:
+	go vet ${PACKAGES}
+
+lint:
+	@go get github.com/golang/lint/golint
+	go list ./... | grep -v vendor | xargs -n1 golint -set_exit_status
+
+.PHONY: test-all test vet lint

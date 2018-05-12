@@ -1,7 +1,8 @@
 language: go
+sudo: false
 go:
   - 1.10
 script:
-  - make test
-after_success:
-  - test -n "$TRAVIS_TAG" && script/release
+  - make test-all
+os:
+  - osx

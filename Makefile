@@ -3,7 +3,7 @@ PACKAGES = $(shell go list ./... | grep -v '/vendor/')
 test-all: vet lint test
 
 test:
-	go test -v -parallel=4 ${PACKAGES}
+	go test -v -parallel=4 ${PACKAGES} -race -coverprofile=profile.out -covermode=atomic
 
 vet:
 	go vet ${PACKAGES}

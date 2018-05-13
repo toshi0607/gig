@@ -1,6 +1,7 @@
 #!/bin/sh
 set -eu
-ROOT_DIR=${SCRIPTS}/..
+
+ROOT_DIR=$(cd $(dirname $0) && cd .. && pwd)
 ARTIFACTS_DIR=${ROOT_DIR}/dist/snapshot
 PACKAGE=gig
 PACKAGE_FULL=github.com/toshi0607/${PACKAGE}
@@ -17,10 +18,10 @@ shasum256() {
 
 formula(){
   cat << EOF > ${PACKAGE}_formula.rb
-require "formula"
 class ${FORMULA_CLASS} < Formula
   homepage 'https://${PACKAGE_FULL}'
   version '${VERSION}'
+
   if Hardware::CPU.is_32_bit?
     if OS.linux?
       url 'https://${PACKAGE_FULL}/releases/download/${TAG}/${PACKAGE}_linux_386.zip'
@@ -38,6 +39,7 @@ class ${FORMULA_CLASS} < Formula
       sha256 '$(shasum256 darwin amd64)'
     end
   end
+
   def install
     bin.install '${PACKAGE}'
   end

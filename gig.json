@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.2",
   "architecture": {
     "64bit": {
       "url": "https://github.com/toshi0607/gig/releases/download/v0.1.1/gig_windows_amd64.zip",

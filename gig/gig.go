@@ -11,8 +11,8 @@ import (
 type Gig struct {
 	OutStream, ErrStream io.Writer
 	Output               []io.Writer
-	Config               config
 	Version              string
+	Config               config
 }
 
 // Run executes gig's functions

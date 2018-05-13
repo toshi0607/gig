@@ -12,13 +12,14 @@ type config struct {
 	File    bool `short:"f" long:"File" description:"Output .gitignore file"`
 	Quiet   bool `short:"q" long:"quiet" description:"Hide stdout"`
 	Version bool `short:"v" long:"version" description:"Show version"`
+	Help    bool `short:"h" long:"help" description:"Show this help message"`
 	Args    struct {
 		Language string
 	} `positional-args:"yes"`
 }
 
 func (g *Gig) initConfig() error {
-	p := flags.NewParser(&g.Config, flags.HelpFlag)
+	p := flags.NewParser(&g.Config, flags.None)
 	_, err := p.Parse()
 	if err != nil {
 		return errors.Wrapf(err, "failed to parse. Config: %s", &g.Config)

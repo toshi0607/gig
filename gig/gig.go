@@ -7,13 +7,12 @@ import (
 	"os"
 )
 
-const version = "v0.0.1"
-
 // Gig is the body of the cli
 type Gig struct {
 	OutStream, ErrStream io.Writer
 	Output               []io.Writer
 	Config               config
+	Version              string
 }
 
 // Run executes gig's functions

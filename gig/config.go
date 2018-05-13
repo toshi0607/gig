@@ -25,7 +25,7 @@ func (g *Gig) initConfig() error {
 	}
 
 	if g.Config.Version {
-		return fmt.Errorf("gig version %s", version)
+		return fmt.Errorf("gig version %s", g.Version)
 	}
 
 	if !g.Config.List && g.Config.Args.Language == "" {

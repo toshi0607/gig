@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.6](https://github.com/toshi0607/gig/compare/v0.0.5...v0.0.6) (2018-05-13)
+
+
 ## [v0.0.5](https://github.com/toshi0607/gig/compare/v0.0.4...v0.0.5) (2018-05-13)
 
 

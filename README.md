@@ -118,6 +118,12 @@ $ brew install gig
 $ go get -u github.com/toshi0607/gig
 ```
 
+### for Scoop (Windows)
+
+```
+$ scoop install https://raw.githubusercontent.com/toshi0607/gig/master/gig.json
+```
+
 ### for others
 You can download the binary directly from [latest release](https://github.com/toshi0607/gig/releases/latest)
 

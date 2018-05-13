@@ -12,9 +12,14 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+*coverage.txt
 
 # dep
 vendor/
+
+# artifacts
+dist/
+gig_formula.rb
 
 # IDE
 .idea

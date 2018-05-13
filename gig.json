@@ -2,12 +2,12 @@
   "version": "0.1.2",
   "architecture": {
     "64bit": {
-      "url": "https://github.com/toshi0607/gig/releases/download/v0.1.1/gig_windows_amd64.zip",
+      "url": "https://github.com/toshi0607/gig/releases/download/v0.1.2/gig_windows_amd64.zip",
       "bin": "gig.exe",
       "extract_dir": "gig_windows_amd64"
     },
     "32bit": {
-      "url": "https://github.com/toshi0607/gig/releases/download/v0.1.1/gig_windows_386.zip",
+      "url": "https://github.com/toshi0607/gig/releases/download/v0.1.2/gig_windows_386.zip",
       "bin": "gig.exe",
       "extract_dir": "gig_windows_386"
     }

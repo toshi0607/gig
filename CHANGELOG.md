@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.1.2](https://github.com/toshi0607/gig/compare/v0.1.1...v0.1.2) (2018-05-13)
+
+* :bug: show help without error [#10](https://github.com/toshi0607/gig/pull/10) ([toshi0607](https://github.com/toshi0607))
+* :bug: add extract_dir property [#9](https://github.com/toshi0607/gig/pull/9) ([toshi0607](https://github.com/toshi0607))
+* :tada: Scoopでインストール対応 [#8](https://github.com/toshi0607/gig/pull/8) ([toshi0607](https://github.com/toshi0607))
+
 ## [v0.1.1](https://github.com/toshi0607/gig/compare/v0.0.6...v0.1.1) (2018-05-13)
 
 * :green_heart: output formula [#7](https://github.com/toshi0607/gig/pull/7) ([toshi0607](https://github.com/toshi0607))

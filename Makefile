@@ -25,7 +25,7 @@ lint:
 	@go get github.com/golang/lint/golint
 	golint ${PACKAGES} -set_exit_status
 
-release: bump upload formula
+release: bump upload formula scoop
 
 bump: setup
 	./scripts/bumpup.sh
@@ -35,5 +35,8 @@ upload: bump
 
 formula: upload
 	./scripts/formula.sh
+
+scoop: upload
+	./scripts/scoop.sh
 
 .PHONY: test-all test vet lint setup release bump upload formula

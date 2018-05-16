@@ -23,7 +23,7 @@ vet:
 
 lint:
 	@go get github.com/golang/lint/golint
-	golint ${PACKAGES} -set_exit_status
+	echo $(PACKAGES) | xargs -n 1 golint -set_exit_status
 
 release: bump upload formula scoop
 

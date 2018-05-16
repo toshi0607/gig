@@ -20,7 +20,7 @@ func Test_Run(t *testing.T) {
 		{[]string{"output gitignore", "C++", "-q"}, []string{"# Compiled Static libraries"}, 0},
 		{[]string{"shows list", "-l"}, []string{"Go", "Rails", "Kotlin"}, 0},
 		{[]string{"shows version", "-v"}, []string{"gig version"}, 1},
-		{[]string{"shows usage", "-q"}, []string{"please check usage above"}, 1},
+		{[]string{"shows usage", "-q"}, []string{"Usage:"}, 1},
 		{[]string{"shows help", "-h"}, []string{"Usage:"}, 1},
 	}
 

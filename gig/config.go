@@ -29,9 +29,10 @@ func (g *Gig) initConfig() error {
 		return fmt.Errorf("gig version %s", g.Version)
 	}
 
-	if !g.Config.List && g.Config.Args.Language == "" {
+	if g.Config.Help ||
+		(!g.Config.List && g.Config.Args.Language == "") {
 		p.WriteHelp(g.ErrStream)
-		return fmt.Errorf("\n please check usage above")
+		return errors.New("")
 	}
 
 	return nil

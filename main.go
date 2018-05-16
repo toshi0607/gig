@@ -14,6 +14,6 @@ func main() {
 			os.Exit(1)
 		}
 	}()
-	cli := &gig.Gig{OutStream: os.Stdout, ErrStream: os.Stderr, Version: VERSION}
+	cli := &gig.Gig{OutStream: os.Stdout, ErrStream: os.Stderr, Version: version}
 	os.Exit(cli.Run())
 }

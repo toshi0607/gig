@@ -36,7 +36,4 @@ upload: bump
 formula: upload
 	./scripts/formula.sh
 
-scoop: upload
-	./scripts/scoop.sh
-
 .PHONY: test-all test vet lint setup release bump upload formula

@@ -19,11 +19,19 @@ test:
 	./scripts/test.sh
 
 vet:
-	go vet ${PACKAGES}
+	go vet $(PACKAGES)
 
 lint:
-	@go get github.com/golang/lint/golint
+	@if [ -z `which errcheck 2> /dev/null` ]; then \
+		go get -u github.com/golang/lint/golint; \
+	fi
 	echo $(PACKAGES) | xargs -n 1 golint -set_exit_status
+
+errcheck:
+	@if [ -z `which errcheck 2> /dev/null` ]; then \
+		go get -u github.com/kisielk/errcheck; \
+	fi
+	echo $(PACKAGES) | xargs errcheck -ignoretests
 
 release: bump upload formula scoop
 

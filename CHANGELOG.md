@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.1.5](https://github.com/toshi0607/gig/compare/v0.1.4...v0.1.5) (2018-06-09)
+
+* :up: go 1.10.3 [#17](https://github.com/toshi0607/gig/pull/17) ([toshi0607](https://github.com/toshi0607))
+* :green_heart: tweet latest release [#16](https://github.com/toshi0607/gig/pull/16) ([toshi0607](https://github.com/toshi0607))
+* :green_heart: add task for errcheck [#15](https://github.com/toshi0607/gig/pull/15) ([toshi0607](https://github.com/toshi0607))
+* :bug: fix scoop script [#14](https://github.com/toshi0607/gig/pull/14) ([toshi0607](https://github.com/toshi0607))
+
 ## [v0.1.4](https://github.com/toshi0607/gig/compare/v0.1.3...v0.1.4) (2018-05-16)
 
 

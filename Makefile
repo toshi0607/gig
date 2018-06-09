@@ -33,7 +33,7 @@ errcheck:
 	fi
 	echo $(PACKAGES) | xargs errcheck -ignoretests
 
-release: bump upload formula scoop tweet
+release: bump upload formula tweet
 
 bump: setup
 	./scripts/bumpup.sh

@@ -41,10 +41,12 @@ func getLang(r io.Reader, ch chan string) error {
 		return errors.Wrap(err, "failed to get document")
 	}
 
+	seen := make(map[string]bool)
 	doc.Find("a").Each(func(_ int, s *goquery.Selection) {
-		url, ok := s.Attr("href")
-		if ok && strings.HasSuffix(url, gitignoreExt) {
-			ch <- extractLang(url)
+		href, ok := s.Attr("href")
+		if ok && strings.HasSuffix(href, gitignoreExt) && !seen[href] {
+			seen[href] = true
+			ch <- extractLang(href)
 		}
 	})
 	return nil

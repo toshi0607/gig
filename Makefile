@@ -1,7 +1,6 @@
 PACKAGES = $(shell ./scripts/packages.sh)
 
 EXTERNAL_TOOLS = \
-    github.com/golang/dep/cmd/dep \
     github.com/laher/goxc \
     github.com/motemen/gobump \
     github.com/tcnksm/ghr \
@@ -10,7 +9,7 @@ EXTERNAL_TOOLS = \
 setup:
 	@for tool in $(EXTERNAL_TOOLS) ; do \
       echo "Installing $$tool" ; \
-      go get $$tool; \
+      go install $$tool@latest; \
     done
 
 test-all: vet lint test

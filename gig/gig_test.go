@@ -2,7 +2,6 @@ package gig
 
 import (
 	"bytes"
-	"fmt"
 	"io"
 	"os"
 	"strings"
@@ -35,9 +34,8 @@ func Test_Run(t *testing.T) {
 		}
 
 		for _, v := range te.containing {
-			containing := fmt.Sprintf(v)
-			if !strings.Contains(stream.String(), containing) {
-				t.Errorf("[%s] actual: %s, want: %s", te.args[0], stream.String(), containing)
+			if !strings.Contains(stream.String(), v) {
+				t.Errorf("[%s] actual: %s, want: %s", te.args[0], stream.String(), v)
 			}
 		}
 

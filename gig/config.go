@@ -22,7 +22,7 @@ func (g *Gig) initConfig() error {
 	p := flags.NewParser(&g.Config, flags.None)
 	_, err := p.Parse()
 	if err != nil {
-		return errors.Wrapf(err, "failed to parse. Config: %s", &g.Config)
+		return errors.Wrapf(err, "failed to parse. Config: %v", &g.Config)
 	}
 
 	if g.Config.Version {

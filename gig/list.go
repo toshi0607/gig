@@ -19,8 +19,9 @@ func (g *Gig) showList() error {
 	defer resp.Body.Close()
 
 	langCh := make(chan string)
+	errCh := make(chan error, 1)
 	go func() {
-		getLang(resp.Body, langCh)
+		errCh <- getLang(resp.Body, langCh)
 		close(langCh)
 	}()
 
@@ -32,6 +33,9 @@ func (g *Gig) showList() error {
 		fmt.Fprintln(g.OutStream, decoded)
 	}
 
+	if err := <-errCh; err != nil {
+		return err
+	}
 	return nil
 }
 

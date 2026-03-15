@@ -1,10 +1,10 @@
 gig
 ====
 
-[![Build Status](https://travis-ci.org/toshi0607/gig.svg?branch=master)](https://travis-ci.org/toshi0607/gig)
+[![Build Status](https://travis-ci.org/toshi0607/gig.svg?branch=main)](https://travis-ci.org/toshi0607/gig)
 [![Go Report Card](https://goreportcard.com/badge/github.com/toshi0607/gig)](https://goreportcard.com/report/github.com/toshi0607/gig)
-[![MIT License](http://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/toshi0607/gig/blob/master/LICENSE)
-[![Codecov](https://codecov.io/github/toshi0607/gig/coverage.svg?branch=master)](https://codecov.io/github/toshi0607/gig?branch=master)
+[![MIT License](http://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/toshi0607/gig/blob/main/LICENSE)
+[![Codecov](https://codecov.io/github/toshi0607/gig/coverage.svg?branch=main)](https://codecov.io/github/toshi0607/gig?branch=main)
 
 ## Description
 generate (or output) .gitignore using [github/gitignore](https://github.com/github/gitignore)
@@ -121,7 +121,7 @@ $ go get -u github.com/toshi0607/gig
 ### for Scoop (Windows)
 
 ```
-$ scoop install https://raw.githubusercontent.com/toshi0607/gig/master/gig.json
+$ scoop install https://raw.githubusercontent.com/toshi0607/gig/main/gig.json
 ```
 
 ### for others

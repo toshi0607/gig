@@ -1,9 +1,7 @@
 PACKAGES = $(shell ./scripts/packages.sh)
 
 EXTERNAL_TOOLS = \
-    github.com/laher/goxc \
-    github.com/motemen/gobump \
-    github.com/tcnksm/ghr \
+    github.com/x-motemen/gobump/cmd/gobump \
     github.com/Songmu/ghch/cmd/ghch
 
 setup:
@@ -11,6 +9,8 @@ setup:
       echo "Installing $$tool" ; \
       go install $$tool@latest; \
     done
+	@echo "Installing goreleaser" ; \
+	go install github.com/goreleaser/goreleaser/v2@latest
 
 test-all: vet lint test
 

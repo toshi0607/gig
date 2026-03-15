@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.2.0](https://github.com/toshi0607/gig/compare/v0.1.5...v0.2.0) (2026-03-15)
+
+* upgrade Go to 1.26 and update tooling [#24](https://github.com/toshi0607/gig/pull/24) ([toshi0607](https://github.com/toshi0607))
+* :up: upgrade Go to 1.26 [#23](https://github.com/toshi0607/gig/pull/23) ([toshi0607](https://github.com/toshi0607))
+* Migrate coverage reporting from Codecov to octocov [#22](https://github.com/toshi0607/gig/pull/22) ([toshi0607](https://github.com/toshi0607))
+* :up: migrate to Go Modules and upgrade Go to 1.24 [#19](https://github.com/toshi0607/gig/pull/19) ([toshi0607](https://github.com/toshi0607))
+* :bug: improve to tweet [#18](https://github.com/toshi0607/gig/pull/18) ([toshi0607](https://github.com/toshi0607))
+
 ## [v0.1.5](https://github.com/toshi0607/gig/compare/v0.1.4...v0.1.5) (2018-06-09)
 
 * :up: go 1.10.3 [#17](https://github.com/toshi0607/gig/pull/17) ([toshi0607](https://github.com/toshi0607))

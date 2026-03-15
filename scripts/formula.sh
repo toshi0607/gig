@@ -2,7 +2,7 @@
 set -eu
 
 ROOT_DIR=$(cd $(dirname $0) && cd .. && pwd)
-ARTIFACTS_DIR=${ROOT_DIR}/dist/snapshot
+ARTIFACTS_DIR=${ROOT_DIR}/dist
 PACKAGE=gig
 PACKAGE_FULL=github.com/toshi0607/${PACKAGE}
 FORMULA_CLASS=Gig

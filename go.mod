@@ -1,6 +1,6 @@
 module github.com/toshi0607/gig
 
-go 1.24
+go 1.26
 
 require (
 	github.com/PuerkitoBio/goquery v1.4.0

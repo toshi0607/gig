@@ -1,10 +1,9 @@
 gig
 ====
 
-[![Build Status](https://travis-ci.org/toshi0607/gig.svg?branch=main)](https://travis-ci.org/toshi0607/gig)
+[![CI](https://github.com/toshi0607/gig/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/toshi0607/gig/actions/workflows/ci.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/toshi0607/gig)](https://goreportcard.com/report/github.com/toshi0607/gig)
 [![MIT License](http://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/toshi0607/gig/blob/main/LICENSE)
-[![Codecov](https://codecov.io/github/toshi0607/gig/coverage.svg?branch=main)](https://codecov.io/github/toshi0607/gig?branch=main)
 
 ## Description
 generate (or output) .gitignore using [github/gitignore](https://github.com/github/gitignore)
@@ -23,13 +22,6 @@ So the gibo is fast, but you have to update local files to use tha latest templa
 [toshi0607/gig](https://github.com/toshi0607/gig) is also a tool for .gitinore.
 The gig always use the latest template by accessing github each time.
 So you don't have to update something manually.
-
-## Requirement
-if you build gig loccally, please exec this command first.
-
-```sh
-$ dep ensure
-```
 
 ## Usage
 
@@ -115,7 +107,7 @@ $ brew install gig
 ### for Go environment
 
 ```sh
-$ go get -u github.com/toshi0607/gig
+$ go install github.com/toshi0607/gig@latest
 ```
 
 ### for Scoop (Windows)
@@ -140,7 +132,7 @@ You can download the binary directly from [latest release](https://github.com/to
 1. Create a feature branch
 1. Commit your changes
 1. Run test suite with the `make test` command and confirm that it passes
-1. Run `gofmt -s`
+1. Run `golangci-lint run`
 1. Create new Pull Request
 
 ## Licence

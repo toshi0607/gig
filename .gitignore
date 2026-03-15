@@ -24,3 +24,6 @@ gig_formula.rb
 # IDE
 .idea
 
+# Claude Code
+.claude/
+

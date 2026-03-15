@@ -1,0 +1,12 @@
+coverage:
+  paths:
+    - coverage.txt
+
+report:
+  if: is_pull_request
+
+comment:
+  if: is_pull_request
+
+summary:
+  if: always

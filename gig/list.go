@@ -16,7 +16,7 @@ func (g *Gig) showList() error {
 	if err != nil {
 		return errors.Wrapf(err, "failed to access URL: %s", gitignoreBaseURL)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	langCh := make(chan string)
 	errCh := make(chan error, 1)
@@ -30,7 +30,7 @@ func (g *Gig) showList() error {
 		if err != nil {
 			return errors.Wrapf(err, "failed to unescape: %s", v)
 		}
-		fmt.Fprintln(g.OutStream, decoded)
+		_, _ = fmt.Fprintln(g.OutStream, decoded)
 	}
 
 	if err := <-errCh; err != nil {
@@ -58,5 +58,5 @@ func getLang(r io.Reader, ch chan string) error {
 
 func extractLang(s string) string {
 	str := strings.Split(s, "/")
-	return strings.Replace(str[len(str)-1], gitignoreExt, "", -1)
+	return strings.ReplaceAll(str[len(str)-1], gitignoreExt, "")
 }

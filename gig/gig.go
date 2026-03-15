@@ -19,14 +19,14 @@ type Gig struct {
 func (g *Gig) Run() int {
 	err := g.initConfig()
 	if err != nil {
-		fmt.Fprintln(g.ErrStream, err)
+		_, _ = fmt.Fprintln(g.ErrStream, err)
 		return 1
 	}
 
 	if g.Config.List {
 		err := g.showList()
 		if err != nil {
-			fmt.Fprintln(g.ErrStream, err)
+			_, _ = fmt.Fprintln(g.ErrStream, err)
 			return 1
 		}
 		return 0
@@ -36,11 +36,11 @@ func (g *Gig) Run() int {
 		var writer io.WriteCloser
 		writer, err := os.Create(gitignoreExt)
 		if err != nil {
-			fmt.Fprintln(g.ErrStream, err)
+			_, _ = fmt.Fprintln(g.ErrStream, err)
 			return 1
 		}
 		g.Output = append(g.Output, writer)
-		defer writer.Close()
+		defer func() { _ = writer.Close() }()
 	}
 	if !g.Config.Quiet {
 		g.Output = append(g.Output, os.Stdout)
@@ -50,15 +50,15 @@ func (g *Gig) Run() int {
 	url := gitignoreFileBaseURL + lang + gitignoreExt
 	resp, err := http.Get(url)
 	if err != nil {
-		fmt.Fprintln(g.ErrStream, err)
+		_, _ = fmt.Fprintln(g.ErrStream, err)
 		return 1
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	dest := io.MultiWriter(g.Output...)
 	_, err = io.Copy(dest, resp.Body)
 	if err != nil {
-		fmt.Fprintln(g.ErrStream, err)
+		_, _ = fmt.Fprintln(g.ErrStream, err)
 		return 1
 	}
 	return 0

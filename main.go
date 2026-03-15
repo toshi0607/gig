@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/toshi0607/gig/gig"
+	"github.com/toshi0607/gig/internal/gig"
 )
 
 func main() {

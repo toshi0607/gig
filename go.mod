@@ -5,7 +5,7 @@ go 1.26
 require (
 	github.com/PuerkitoBio/goquery v1.4.0
 	github.com/jessevdk/go-flags v1.6.1
-	github.com/pkg/errors v0.8.0
+	github.com/pkg/errors v0.9.1
 )
 
 require (

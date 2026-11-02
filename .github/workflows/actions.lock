@@ -6,7 +6,7 @@ workflows:
     '.github/workflows/ci.yml':
         - 'actions/checkout@v4.4.0'
         - 'actions/setup-go@v5.6.0'
-        - 'golangci/golangci-lint-action@v7.0.1'
+        - 'golangci/golangci-lint-action@v9.3.0'
         - 'k1low/octocov-action@v1.5.2'
     '.github/workflows/verify-lockfile.yml':
         - 'actions/checkout@v7.0.1'
@@ -31,9 +31,9 @@ dependencies:
         commit: 'sha1-40f1582b2485089dde7abd97c1529aa768e1baff'
         owner_id: 44036562
         repo_id: 192624594
-    'golangci/golangci-lint-action@v7.0.1':
-        ref: 'v7.0.1'
-        commit: 'sha1-9fae48acfc02a90574d7c304a1758ef9895495fa'
+    'golangci/golangci-lint-action@v9.3.0':
+        ref: 'v9.3.0'
+        commit: 'sha1-ba0d7d2ec06a0ea1cb5fa41b2e4a3ab91d21278a'
         owner_id: 35628013
         repo_id: 232539879
     'k1low/gh-setup@5fb38d34ea857e5a942b6fe10f1723e55055f6c0':

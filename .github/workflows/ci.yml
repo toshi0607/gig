@@ -14,9 +14,9 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.4.0
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v5.6.0
         with:
           go-version-file: .go-version
           cache: true
@@ -25,7 +25,7 @@ jobs:
         run: go vet $(go list ./... | grep -v vendor)
 
       - name: lint
-        uses: golangci/golangci-lint-action@v7
+        uses: golangci/golangci-lint-action@v7.0.1
         with:
           version: v2.11.3
 
@@ -33,4 +33,4 @@ jobs:
         run: ./scripts/test.sh
 
       - name: coverage
-        uses: k1LoW/octocov-action@v1
+        uses: k1LoW/octocov-action@v1.5.2

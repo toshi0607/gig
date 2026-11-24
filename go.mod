@@ -1,15 +1,15 @@
 module github.com/toshi0607/gig
 
-go 1.26
+go 1.26.0
 
 require (
-	github.com/PuerkitoBio/goquery v1.13.0
+	github.com/PuerkitoBio/goquery v1.14.0
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/pkg/errors v0.9.1
 )
 
 require (
-	github.com/andybalholm/cascadia v1.3.4 // indirect
-	golang.org/x/net v0.58.0 // indirect
-	golang.org/x/sys v0.47.0 // indirect
+	github.com/andybalholm/cascadia v1.3.5 // indirect
+	golang.org/x/net v0.62.0 // indirect
+	golang.org/x/sys v0.49.0 // indirect
 )
